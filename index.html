@@ -27,10 +27,9 @@
 
   <script>
     // 可正常播放的 Akamai 公開 m3u8 串流
-    const originalM3u8Url = "https://cph-p2p-msl.akamaized.net/hls/live/2000341/test/master.m3u8";
+   const originalM3u8Url = "https://cph-p2p-msl.akamaized.net/hls/live/2000341/test/master.m3u8";
+   const proxyUrl = "https://noisy-dawn-9a87.youngboyhey.workers.dev/?url=" + encodeURIComponent(originalM3u8Url);
 
-    // 透過 Cloudflare Worker 轉發，記得用 `?url=...`
-    const proxyUrl = "https://noisy-dawn-9a87.youngboyhey.workers.dev/?url=" + encodeURIComponent(originalM3u8Url);
 
     function playM3u8(video, url, art) {
       if (Hls.isSupported()) {
