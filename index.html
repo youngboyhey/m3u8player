@@ -26,10 +26,8 @@
     <div id="player"></div>
     <script>
         // 使用 Akamai 公開測試串流，穩定無 CORS 問題
-        const originalM3u8Url = "https://cph-p2p-msl.akamaized.net/hls/live/2000341/test/master.m3u8";
-
-        // 透過您的 Cloudflare Worker 進行轉發
-        const proxyUrl = "https://noisy-dawn-9a87.youngboyhey.workers.dev/?url=" + encodeURIComponent(originalM3u8Url);
+       const originalM3u8Url = "https://cph-p2p-msl.akamaized.net/hls/live/2000341/test/master.m3u8";
+const proxyUrl = "https://noisy-dawn-9a87.youngboyhey.workers.dev/?url=" + encodeURIComponent(originalM3u8Url);
 
         function playM3u8(video, url, art) {
             if (Hls.isSupported()) {
