@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>m3u8代理播放測試</title>
+    <title>m3u8 代理播放測試</title>
     <script src="https://cdn.jsdelivr.net/npm/artplayer/dist/artplayer.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/hls.js/dist/hls.min.js"></script>
     <style>
@@ -22,12 +22,14 @@
     </style>
 </head>
 <body>
-    <h2>m3u8 代理播放測試</h2>
+    <h2>m3u8 測試播放（經 Cloudflare Worker 代理）</h2>
     <div id="player"></div>
     <script>
-        const proxyUrl = "https://noisy-dawn-9a87.youngboyhey.workers.dev/?url=" + encodeURIComponent(
-            "https://media-hls.doppiocdn.org/b-hls-01/196205035/196205035_960p.m3u8?playlistType=lowLatency&psch=v1&pkey=Zokee2OhPh9kugh4&_HLS_msn=1687&_HLS_part=2"
-        );
+        // 使用 Akamai 公開測試串流，穩定無 CORS 問題
+        const originalM3u8Url = "https://cph-p2p-msl.akamaized.net/hls/live/2000341/test/master.m3u8";
+
+        // 透過您的 Cloudflare Worker 進行轉發
+        const proxyUrl = "https://noisy-dawn-9a87.youngboyhey.workers.dev/?url=" + encodeURIComponent(originalM3u8Url);
 
         function playM3u8(video, url, art) {
             if (Hls.isSupported()) {
@@ -43,7 +45,7 @@
             }
         }
 
-        const art = new Artplayer({
+        new Artplayer({
             container: '#player',
             url: proxyUrl,
             type: 'm3u8',
